@@ -1,0 +1,12 @@
+﻿@using QuickStartIdentityServer.Views.Admin
+
+<ul class="nav nav-pills nav-stacked">
+    <li class="@AdminNavPages.IndexNavClass(ViewContext)"><a asp-action="Index">Dashboard</a></li>
+    <li class="@AdminNavPages.UsersNavClass(ViewContext)"><a asp-action="Users">Users</a></li>
+    <li class="@AdminNavPages.RolesNavClass(ViewContext)"><a asp-action="Roles">Roles</a></li>
+    <li class="@AdminNavPages.ProductsNavClass(ViewContext)"><a asp-action="Products">Products</a></li>
+    <li class="@AdminNavPages.LicensesNavClass(ViewContext)"><a asp-action="Licenses">Licenses</a></li>
+    <li class="@AdminNavPages.InvoicesNavClass(ViewContext)"><a asp-action="Invoices">Invoices</a></li>
+    <li class="@AdminNavPages.SpecialsNavClass(ViewContext)"><a asp-action="Specials">Specials</a></li>
+</ul>
+

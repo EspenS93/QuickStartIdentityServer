@@ -1,0 +1,63 @@
+﻿@inject RoleManager<IdentityRole> RoleManager
+
+@model RegisterRoleViewModel
+@{
+    var roles = RoleManager.Roles;
+    var headers = new List<string>
+            {
+                "name"
+            };
+
+}
+
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-9">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <h4>Create a new role.</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Register</button>
+        </form>
+
+        <div>
+            <h2>@Model.Name</h2>
+            <div>
+                <table>
+                    <thead>
+                        @foreach (var header in headers)
+                        {
+                            <tr>@header</tr>
+                        }
+                    </thead>
+                    <tbody>
+                        @foreach (var role in roles.ToArray())
+                        {
+                            <tr>
+                                <td>@role.Id</td>
+                                <td>@role.Name</td>
+                                <td>@role.NormalizedName</td>
+                                <td>@role.ConcurrencyStamp</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
